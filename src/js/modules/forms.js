@@ -10,9 +10,9 @@ const forms = () => {
     });
 
     const message = {
-        loading: 'Загрузка',
-        success: 'Спасибо! мы с вами свяжемся',
-        failure: 'Что-то пошло не так'
+        loading: 'Загрузка...',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
     };
 
     const postData = async (url, data) => {
@@ -21,19 +21,21 @@ const forms = () => {
             method: "POST",
             body: data
         });
+
         return await res.text();
     };
 
-    const clearInput = () => {
+    const clearInputs = () => {
         inputs.forEach(item => {
             item.value = '';
-        })
+        });
     };
 
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
             e.preventDefault();
-            const statusMessage = document.createElement('div');
+
+            let statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
 
@@ -46,14 +48,13 @@ const forms = () => {
                 })
                 .catch(() => statusMessage.textContent = message.failure)
                 .finally(() => {
-                    clearInput();
+                    clearInputs();
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 5000);
                 });
         });
     });
-
 };
 
 export default forms;
