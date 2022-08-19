@@ -43,7 +43,6 @@ const forms = (state) => {
                 }
             }
 
-
             postData('assets/server.php', formData)
                 .then(res => {
                     console.log(res);
